@@ -73,4 +73,4 @@ The stacked LSTM was then trained for 10 epochs
 After training was completed, the model was used to predict the test set and produced a Root Mean Squared error of approximately 86, which is quite an outstandingly low figure considering our data ranges between the 2000 and 4000 area. 
 
 The predictions of the model on both the training and test set plotted against the actual data are also displayed below.
-![png](result.png)
+![png](Screenshot (638).png)
