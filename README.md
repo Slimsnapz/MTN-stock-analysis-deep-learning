@@ -3,17 +3,16 @@ Project
 #### -- Project Status: [Completed]
 
 ## Project Description
-After finishing Kaggle's amazing time series course, it only makes sense to pick up a project related to the topic. I decided to explore stock price prediction ideas since it is perhaps the simplest form of a time series project out there. However, instead of picking up the popular or hot company stocks (like AAPL, Tesla, etc.), I thought it would be best to analyze a local public company close to home, namely Telkom Indonesia. Telkom Indonesia is a multinational telecommunications conglomerate and is one of the most popular stocks listed on the Indonesia Stocks Exchange. In this project, I will be using Telkom's stock data from 2016 to 2021 to apply time series analysis techniques as well as creating a stacked LSTM model to learn and forecast the data.
+### Overview
+it only makes sense to pick up a project related to the topic. I decided to explore stock price prediction ideas since it is perhaps the simplest form of a time series project out there. I thought it would be best to analyze a local public company close to home, namely MTN Nigeria. MTN Nigeria is a company that primarily offers cellular network access and ICT solutions. It's services portfolio include mobile voice, text services, Internet services, such as video calling, data services and Internet browsing, mobile Internet and mobile WiFi services.. In this project, I will be using MTN stock data from 2020 to 2024 to apply time series analysis techniques as well as creating a LSTM model to learn and forecast the data. The MTN Stock Analysis project aims to leverage machine learning techniques, particularly deep learning with Long Short-Term Memory (LSTM) networks, to analyze and forecast the stock prices of MTN Nigeria, a leading telecommunications provider in Nigeria. This project integrates various methodologies, including time series data preprocessing, visualization, and LSTM modeling, to derive insights and predictions about MTN Nigeria's stock performance.
 
 ### Methods Used
-* Web Scraping
 * Time Series Data Preprocessing
 * Time Series Data Visualization 
 * Stacked Long Short-Term Memory Neural Networks 
 
 ### Technologies
 * Python
-* BeautifulSoup4
 * Pandas
 * Matplotlib, Seaborn
 * Tensorflow
