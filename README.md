@@ -19,22 +19,23 @@ it only makes sense to pick up a project related to the topic. I decided to expl
 * Scikit-learn
 
 ### Data
-The Telkom stocks data was scraped using Beautiful Soup from the [Yahoo Finance website](https://finance.yahoo.com/quote/TLKM.JK/) and 1260 Data points were obtained comprising of stock details from 2 November 2016 to 2021. 
+The MTN stocks data was downloaded from [Nigeria investing website](https://ng.investing.com/equities/mtn-nigeria-com-historical-data) and 1057 Data points were obtained comprising of stock details from 1 january 2020 to 2024. 
 
 
 ## Preprocessing
-The data from the web scraping script already produced decently clean data. However, there are still several missing values from the `value` column originating from the Yahoo Finance site itself. I decided to simply rows, which has a null entry on `value` resulting in only a 4.7% loss of data. The stocks data also comes in IDR or Indonesian Rupiah, which has quite the unconventional use of commas and decimal points. The function below will parse or convert IDR values to recognizable integers that can easily be processed. 
+The data from investment Nigeria was good. However, the data column are of diffrent data types which can prove problematic during analysis. I decided to convert the data in each column to the same data type. The stocks data also comes in IDR, which has quite the unconventional use of commas and decimal points. The function below will parse or convert IDR values to recognizable integers that can easily be processed. 
 ```python
+#creating a function that removes the % sign from the figures
 def idr_parser(cur_str):
-    cur_str = re.sub("[,]", '', cur_str)
- 
-    if '.' in list(cur_str[-3:]):
-        return cur_str[:-3]
-    
-    return cur_str
+  try:
+    cur_str = str(cur_str)
+  except:
+    pass
+  cur_str = re.sub('[%]', '', cur_str)
+  return cur_str
 ```
 ## Visualization
-For the data visualization, I constructed distribution plots of each feature and also explored the full historical data in the 5-year span. Moving averages plots (on various window lengths) and seasonal decomposition plots are also constructed since it is time-series data after all. All of the plots are displayed in the [notebook](https://github.com/anantoj/telkom-stocks-analysis/blob/main/telkom_stock_notebook.ipynb).
+For the data visualization, I constructed distribution plots of each feature and also explored the full historical data in the 4-year span. Moving averages plots (on various window lengths) and seasonal decomposition plots are also constructed since it is time-series data after all. All of the plots are displayed in the [notebook](https://github.com/anantoj/telkom-stocks-analysis/blob/main/telkom_stock_notebook.ipynb).
 
 ## LSTMs
 Recurrent Neural Networks are undoubtedly the most suitable type of neural network to handle time-series data due to their ability to retain a memory of past inputs. LSTMs are essentially just a better version of vanilla RNNs due to the cell states that allows information to be removed or added at will. Essentially, LSTMs are far better at retaining memory and are insensitive to gap length, which is quite important considering the many data points we will input. Stacked LSTMs, on the other hand, increase the depth by adding multiple hidden LSTM layers in the architecture, which allows for better learning capabilities and accuracy. After experimenting with both vanilla LSTMs and stacked LSTMs on the stocks data, stacked LSTMs were (more often than not) able to marginally produce better results. The code snippet below shows the details of the stacked LSTM architecture, as well as the optimizer and loss function used in the training pipeline.
