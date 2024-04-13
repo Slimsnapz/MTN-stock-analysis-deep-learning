@@ -53,22 +53,24 @@ For the data visualization, I constructed distribution plots of each feature and
 ## LSTMs
 Recurrent Neural Networks are undoubtedly the most suitable type of neural network to handle time-series data due to their ability to retain a memory of past inputs. LSTMs are essentially just a better version of vanilla RNNs due to the cell states that allows information to be removed or added at will. Essentially, LSTMs are far better at retaining memory and are insensitive to gap length, which is quite important considering the many data points we will input. Stacked LSTMs, on the other hand, increase the depth by adding multiple hidden LSTM layers in the architecture, which allows for better learning capabilities and accuracy. After experimenting with both vanilla LSTMs and stacked LSTMs on the stocks data, stacked LSTMs were (more often than not) able to marginally produce better results. The code snippet below shows the details of the stacked LSTM architecture, as well as the optimizer and loss function used in the training pipeline.
 ```python
-lstm = Sequential()
-lstm.add(LSTM(128, return_sequences=True, input_shape=(step,1)))
-lstm.add(LSTM(64, return_sequences=False))
-lstm.add(Dense(25))
-lstm.add(Dense(1))
+model = Sequential()
+model.add(LSTM(128, return_sequences=True, input_shape=(step,1)))
+model.add(LSTM(64, return_sequences=False))
+model.add(Dense(25))
+model.add(Dense(1))
 
-lstm.compile(
+model.compile(
     optimizer='adam',
     loss='mean_squared_error',
-    metrics=[tensorflow.keras.metrics.MeanSquaredError(),
-             tensorflow.keras.metrics.RootMeanSquaredError()]
+    metrics=['accuracy',tf.keras.metrics.MeanSquaredError(),
+             tf.keras.metrics.RootMeanSquaredError()],
+    
 )
+model.summary()
 ```
 The stacked LSTM was then trained for 10 epochs 
 ## Result
-After training was completed, the model was used to predict the test set and produced a Root Mean Squared error of approximately 70, which is quite an outstandingly low figure considering our data ranges between the 2000 and 4000 area. 
+After training was completed, the model was used to predict the test set and produced a Root Mean Squared error of approximately 86, which is quite an outstandingly low figure considering our data ranges between the 2000 and 4000 area. 
 
 The predictions of the model on both the training and test set plotted against the actual data are also displayed below.
 ![png](result.png)
